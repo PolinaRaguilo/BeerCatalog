@@ -17,8 +17,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import StarIcon from '@material-ui/icons/Star';
 import InboxIcon from '@material-ui/icons/Inbox';
-import MoreIcon from '@material-ui/icons/MoreVert';
-
+import { Link } from 'react-router-dom';
+import './header.css'
 
 const drawerWidth = 240;
 
@@ -133,14 +133,18 @@ export default function Header() {
         </div>
         <Divider />
         <List>
-        <ListItem button > 
-                <ListItemIcon> <InboxIcon /></ListItemIcon>
-              <ListItemText primary={'Home'} />
-        </ListItem>
+          <Link to='/' className='menu__link'>
+            <ListItem button > 
+                  <ListItemIcon> <InboxIcon /></ListItemIcon>
+                  <ListItemText primary={'Home'} />
+            </ListItem>
+          </Link>
+          <Link to="/favorite" className='menu__link'>
         <ListItem button > 
             <ListItemIcon> <StarIcon /></ListItemIcon>
             <ListItemText primary={'Favorite'} />
         </ListItem>
+        </Link>
         </List>
       </Drawer>
       {/* <main
