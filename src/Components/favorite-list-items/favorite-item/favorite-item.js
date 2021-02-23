@@ -14,14 +14,19 @@ class FavoriteItem extends Component {
     return (
       <Card className="favorite-card__wrapper">
         <div className="favorite__inner">
-          <CardContent>
+          <CardContent className="favorite__card-content">
             <Typography variant="h5" component="h2">
               Title
             </Typography>
             <Typography variant="h6" component="h2" className="tagline">
               Tagline
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p" className="favorite__description">
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              className="favorite__description"
+            >
               descriptondescriptondescriptondescriptondescriptondescriptondescriptondescripton
             </Typography>
           </CardContent>

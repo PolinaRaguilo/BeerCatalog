@@ -15,8 +15,8 @@ class MainItem extends Component {
       <Card className="card__wrapper">
         <CardContent>
           <CardMedia
-          className="card__img"
-            image='https://cdn.imgbin.com/2/1/8/imgbin-beer-glasses-computer-icons-drink-glass-of-beer-U8bqcA5q8ZKQdsKtgVCfj7xbt.jpg'
+            className="card__img"
+            image="https://cdn.imgbin.com/2/1/8/imgbin-beer-glasses-computer-icons-drink-glass-of-beer-U8bqcA5q8ZKQdsKtgVCfj7xbt.jpg"
           />
           <Typography variant="h5" component="h2">
             Title

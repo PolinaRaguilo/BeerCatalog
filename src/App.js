@@ -9,8 +9,8 @@ function App() {
     <>
       <BrowserRouter>
         <Header />
-        <Route exact path='/' component={CatalogPage}/>
-        <Route exact path="/favorite" component={FavoritePage}/>
+        <Route exact path="/" component={CatalogPage} />
+        <Route exact path="/favorite" component={FavoritePage} />
       </BrowserRouter>
     </>
   );
