@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable arrow-parens */
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import MainListItems from "../../Components/main-list-items/main-list-items";
 import { fetchBeers } from "../../Redux/actions/beerAction";
@@ -23,6 +23,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getAllBeers: () => dispatch(fetchBeers()),
   };
+};
+
+CatalogPage.propTypes = {
+  getAllBeers: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(CatalogPage);
