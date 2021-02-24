@@ -7,7 +7,7 @@ import { fetchBeers } from "../../Redux/actions/beerAction";
 
 class CatalogPage extends Component {
   componentDidMount = () => {
-    this.props.getAllBeers();
+    this.props.getBeers();
   };
 
   render() {
@@ -21,12 +21,12 @@ class CatalogPage extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAllBeers: () => dispatch(fetchBeers()),
+    getBeers: () => dispatch(fetchBeers()),
   };
 };
 
 CatalogPage.propTypes = {
-  getAllBeers: PropTypes.func.isRequired,
+  getBeers: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(CatalogPage);

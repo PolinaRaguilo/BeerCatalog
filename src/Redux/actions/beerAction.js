@@ -27,7 +27,6 @@ export const fetchBeers = () => async (dispatch) => {
   try {
     const response = await beerApi.getWithPagination();
     dispatch(receiveBeer(Object.values(response.data)));
-    console.log(response.data);
   } catch (error) {
     console.log(error);
     dispatch(failLoadBeer());

@@ -10,6 +10,10 @@ import {
 import "./main-item.css";
 
 class MainItem extends Component {
+  addFavoriteHandler = () => {
+    this.props.addFavoriteBeer(this.props.id);
+  };
+
   render() {
     const { id, name, tagline, img } = this.props;
     console.log(id);
@@ -28,7 +32,11 @@ class MainItem extends Component {
           <Button size="small" color="primary">
             Open
           </Button>
-          <Button size="small" color="primary">
+          <Button
+            size="small"
+            color="primary"
+            onClick={this.addFavoriteHandler}
+          >
             Favorite
           </Button>
         </CardActions>
@@ -42,6 +50,7 @@ MainItem.propTypes = {
   name: PropTypes.string.isRequired,
   tagline: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
+  addFavoriteBeer: PropTypes.func.isRequired,
 };
 
 export default MainItem;
