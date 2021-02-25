@@ -13,11 +13,13 @@ import { connect } from "react-redux";
 import { deleteFavorite } from "../../../Redux/actions/favoriteAction";
 
 class MainItem extends Component {
-  // isFavorite = this.props.favoritesData.find(
+  // favoriteBeer = this.props.favoritesData.find(
   //   (item) => item.id === this.props.id
   // );
 
-  // showRemoveBool = this.props.favoritesData.favorites.filter(
+  // isFavorite = this.props.favoritesData.indexOf(this.favoriteBeer);
+
+  // isFavorite = this.props.favoritesData.filter(
   //   (item) => item.id === this.props.id
   // );
 
@@ -30,8 +32,12 @@ class MainItem extends Component {
   };
 
   render() {
+    const favoriteBeer = this.props.favoritesData.find(
+      (item) => item.id === this.props.id
+    );
+
+    const isFavorite = this.props.favoritesData.indexOf(favoriteBeer);
     const { name, tagline, img } = this.props;
-    // console.log(this.showRemoveBool);
     return (
       <Card className="card__wrapper">
         <CardContent>
@@ -51,14 +57,14 @@ class MainItem extends Component {
             size="small"
             color="primary"
             onClick={this.addFavoriteHandler}
-            // className={this.showRemoveBool ? "btn__show" : "btn__none"}
+            className={isFavorite === -1 ? "btn__show" : "btn__none"}
           >
             Favorite
           </Button>
           <Button
             size="small"
             color="primary"
-            // className={this.showRemoveBool ? "btn__none" : "btn__show"}
+            className={isFavorite === -1 ? "btn__none" : "btn__show"}
             onClick={this.deleteHandler}
           >
             Remove favorite
@@ -88,7 +94,7 @@ MainItem.propTypes = {
   img: PropTypes.string.isRequired,
   addFavoriteBeer: PropTypes.func.isRequired,
   onDeleteFavorite: PropTypes.func.isRequired,
-  // favoritesData: PropTypes.array.isRequired,
+  favoritesData: PropTypes.array.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainItem);
