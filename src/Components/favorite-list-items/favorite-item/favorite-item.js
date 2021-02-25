@@ -10,9 +10,12 @@ import PropTypes from "prop-types";
 import "./favorite-item.css";
 
 class FavoriteItem extends Component {
+  deleteHandler = () => {
+    this.props.deleteItem(this.props.id);
+  };
+
   render() {
-    const { id, name, tagline, description, img } = this.props;
-    console.log(id);
+    const { name, tagline, description, img } = this.props;
     return (
       <Card className="favorite-card__wrapper">
         <div className="favorite__inner">
@@ -36,7 +39,7 @@ class FavoriteItem extends Component {
             <Button size="small" color="primary">
               Open
             </Button>
-            <Button size="small" color="primary">
+            <Button size="small" color="primary" onClick={this.deleteHandler}>
               Remove
             </Button>
           </CardActions>
@@ -52,6 +55,7 @@ FavoriteItem.propTypes = {
   tagline: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
+  deleteItem: PropTypes.func.isRequired,
 };
 
 export default FavoriteItem;

@@ -4,8 +4,13 @@ import PropTypes from "prop-types";
 import "./favorite-list-items.css";
 import { connect } from "react-redux";
 import FavoriteItem from "./favorite-item/favorite-item";
+import { deleteFavorite } from "../../Redux/actions/favoriteAction";
 
 class FavoriteListItems extends Component {
+  deleteFavorite = (id) => {
+    this.props.deleteFromFavorite(id);
+  };
+
   render() {
     const favoriteItems = this.props.favoriteBeers.map((item) => {
       const { id, name, tagline, description, img } = item;
@@ -17,6 +22,7 @@ class FavoriteListItems extends Component {
           tagline={tagline}
           description={description}
           img={img}
+          deleteItem={this.deleteFavorite}
         />
       );
     });
@@ -35,8 +41,15 @@ const mapStateToProps = (state) => {
   };
 };
 
-FavoriteListItems.propTypes = {
-  favoriteBeers: PropTypes.array.isRequired,
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteFromFavorite: (id) => dispatch(deleteFavorite(id)),
+  };
 };
 
-export default connect(mapStateToProps, null)(FavoriteListItems);
+FavoriteListItems.propTypes = {
+  favoriteBeers: PropTypes.array.isRequired,
+  deleteFromFavorite: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FavoriteListItems);
