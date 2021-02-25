@@ -15,3 +15,11 @@
     height: 180px;
     width: 65px;
 }
+
+.btn__none.btn__none{
+    display: none;
+}
+
+.btn__show.btn__show{
+    display: block;
+}

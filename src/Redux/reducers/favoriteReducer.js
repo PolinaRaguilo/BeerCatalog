@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 const initialState = {
   favorites: [],
 };
@@ -17,6 +18,11 @@ const favoriteReducer = (state = initialState, action) => {
             img: action.img,
           },
         ],
+      };
+    case "DELETE_FROM_FAVORITE":
+      return {
+        ...state,
+        favorites: [...state.favorites.filter((item) => item.id !== action.id)],
       };
     default:
       return state;
