@@ -10,8 +10,8 @@ import { addFavorite } from "../../Redux/actions/favoriteAction";
 class MainListItems extends Component {
   addToFavorite = (idBeer) => {
     const beer = this.props.beerData.find((item) => item.id === idBeer);
-    const { id, name, tagline, description, img } = beer;
-    this.props.onFavoriteBeer(id, name, tagline, description, img);
+    const { id, name, tagline, description, image_url } = beer;
+    this.props.onFavoriteBeer(id, name, tagline, description, image_url);
   };
 
   render() {

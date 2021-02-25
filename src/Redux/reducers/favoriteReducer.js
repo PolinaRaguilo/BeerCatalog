@@ -11,7 +11,7 @@ const favoriteReducer = (state = initialState, action) => {
           ...state.favorites,
           {
             id: action.id,
-            title: action.title,
+            name: action.name,
             tagline: action.tagline,
             description: action.description,
             img: action.img,

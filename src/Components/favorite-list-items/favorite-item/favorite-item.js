@@ -1,25 +1,27 @@
+import React, { Component } from "react";
 import {
   Button,
   Card,
   CardActions,
   CardContent,
-  CardMedia,
   Typography,
 } from "@material-ui/core";
-import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./favorite-item.css";
 
 class FavoriteItem extends Component {
   render() {
+    const { id, name, tagline, description, img } = this.props;
+    console.log(id);
     return (
       <Card className="favorite-card__wrapper">
         <div className="favorite__inner">
           <CardContent className="favorite__card-content">
             <Typography variant="h5" component="h2">
-              Title
+              {name}
             </Typography>
             <Typography variant="h6" component="h2" className="tagline">
-              Tagline
+              {tagline}
             </Typography>
             <Typography
               variant="body2"
@@ -27,7 +29,7 @@ class FavoriteItem extends Component {
               component="p"
               className="favorite__description"
             >
-              descriptondescriptondescriptondescriptondescriptondescriptondescriptondescripton
+              {description}
             </Typography>
           </CardContent>
           <CardActions>
@@ -39,13 +41,17 @@ class FavoriteItem extends Component {
             </Button>
           </CardActions>
         </div>
-        <CardMedia
-          className="card__img"
-          image="https://cdn.imgbin.com/2/1/8/imgbin-beer-glasses-computer-icons-drink-glass-of-beer-U8bqcA5q8ZKQdsKtgVCfj7xbt.jpg"
-        />
+        <img src={img} className="card__img" alt="favorite-beer" />
       </Card>
     );
   }
 }
+FavoriteItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  tagline: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired,
+};
 
 export default FavoriteItem;

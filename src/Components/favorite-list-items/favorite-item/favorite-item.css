@@ -1,7 +1,7 @@
 .favorite-card__wrapper{
     display: flex;
     justify-content: space-between;
-    height: 250px;
+    height: auto;
     margin: 0 auto;
     margin-top: 30px;
     padding: 20px;
@@ -21,4 +21,9 @@
     margin: unset;
     margin-right: 35px;
     margin-top: 20px;
+}
+
+.favorite-card__wrapper .tagline{
+    font-style: italic;
+    font-size: 13px;
 }
