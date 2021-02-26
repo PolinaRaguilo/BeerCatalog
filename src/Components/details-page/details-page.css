@@ -1,0 +1,83 @@
+.details__wrapper{
+    width: 100%;
+    padding: 85px 100px 0px 100px;
+}
+.description__wrapper{
+    display: flex;
+    justify-content: space-around;
+}
+
+.details__wrapper .description__wrapper:nth-child(2), .details__wrapper .description__wrapper:nth-child(3){
+    justify-content: unset;
+}
+.details__tagline.details__tagline{
+    font-style: italic;
+    color: gray;
+    font-size: 25px;
+}
+
+.details__btn.details__btn{
+    margin-top: 20px;
+}
+
+.details__description.details__description{
+    margin-top: 20px;
+}
+
+.details__img{
+    width: 65px;
+}
+
+.list__properties{
+    width: 250px;
+
+}
+.list__pairing{
+    width: auto;
+}
+
+
+.tooltip__icon.tooltip__icon{
+    margin-right: 120px;
+    width: 20px;
+
+    color: gray;
+}
+
+.propertie__value{
+    border-radius: 40px;
+    text-align: center;
+    width: 40px;
+    height: 20px;
+    background-color: gray;
+    color: white;
+}
+
+
+.brewing__wrapper,.properties__wrapper{
+    margin-left: 330px;
+}
+.brewing__wrapper{
+    margin-top: 40px;
+}
+
+.pairing__wrapper, .method__wrapper{
+    margin-left: 130px;
+}
+
+.ingridients__wrapper, .method__wrapper{
+    margin-top: 40px;
+}
+.ingridient__name{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.ingridients__value{
+    color: gray;
+    display: block;
+}
+
+.li__item.li__item{
+    display: block;
+}
