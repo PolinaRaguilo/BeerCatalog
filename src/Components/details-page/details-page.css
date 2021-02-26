@@ -4,7 +4,6 @@
 }
 .description__wrapper{
     display: flex;
-    justify-content: space-around;
 }
 
 .details__wrapper .description__wrapper:nth-child(2), .details__wrapper .description__wrapper:nth-child(3){
@@ -22,10 +21,14 @@
 
 .details__description.details__description{
     margin-top: 20px;
+    width: 70%;
 }
-
+.description__inner{
+    margin-left: 330px;
+}
 .details__img{
     width: 65px;
+    margin-right: 200px;
 }
 
 .list__properties{

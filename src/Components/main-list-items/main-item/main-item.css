@@ -23,3 +23,10 @@
 .btn__show.btn__show{
     display: block;
 }
+.link__open{
+    text-decoration: none;
+}
+
+.link__open:visited{
+    color: unset;
+}

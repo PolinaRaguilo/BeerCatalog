@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import "./main-item.css";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { deleteFavorite } from "../../../Redux/actions/favoriteAction";
 
 class MainItem extends Component {
@@ -51,8 +52,11 @@ class MainItem extends Component {
         </CardContent>
         <CardActions>
           <Button size="small" color="primary">
-            Open
+            <Link to={`/beer/${this.props.id}`} className="link__open">
+              Open
+            </Link>
           </Button>
+
           <Button
             size="small"
             color="primary"

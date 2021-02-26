@@ -1,3 +1,6 @@
+/* eslint-disable arrow-parens */
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import {
   Button,
   Divider,
@@ -8,20 +11,22 @@ import {
   Typography,
 } from "@material-ui/core";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
-import React, { Component } from "react";
 import "./details-page.css";
+import { connect } from "react-redux";
 
 class DetailsPage extends Component {
   render() {
+    const urlID = this.props.match.params.id;
+    const singleBeer = this.props.beersItems.find((item) => item.id === +urlID);
     return (
       <div className="details__wrapper">
         <div className="description__wrapper">
           <div className="description__inner">
             <Typography variant="h3" className="details__title">
-              Title
+              {singleBeer.name}
             </Typography>
             <Typography variant="h4" className="details__tagline">
-              Tagline
+              {singleBeer.tagline}
             </Typography>
             <Button
               variant="contained"
@@ -31,14 +36,10 @@ class DetailsPage extends Component {
               Add to favorites
             </Button>
             <Typography variant="body2" className="details__description">
-              descriptiondescriptiondescriptiondescription
+              {singleBeer.description}
             </Typography>
           </div>
-          <img
-            src="https://images.punkapi.com/v2/192.png"
-            alt="beer"
-            className="details__img"
-          />
+          <img src={singleBeer.image_url} alt="beer" className="details__img" />
         </div>
 
         <div className="description__wrapper">
@@ -85,7 +86,7 @@ class DetailsPage extends Component {
         <div className="brewing__wrapper">
           <Typography variant="h4">Brewing</Typography>
           <Typography variant="body2" className="details__description">
-            23534hfdh6436dhf
+            {singleBeer.brewers_tips}
           </Typography>
           <div className="description__wrapper">
             <div className="ingridients__wrapper">
@@ -149,4 +150,15 @@ class DetailsPage extends Component {
   }
 }
 
-export default DetailsPage;
+const mapStateToProps = (state) => {
+  return {
+    beersItems: state.beerReducer.beers,
+  };
+};
+
+DetailsPage.propTypes = {
+  match: PropTypes.object.isRequired,
+  beersItems: PropTypes.array.isRequired,
+};
+
+export default connect(mapStateToProps, null)(DetailsPage);
