@@ -16,9 +16,10 @@ const requestBeer = () => {
   };
 };
 
-const failLoadBeer = () => {
+const failLoadBeer = (err) => {
   return {
     type: "BEERS/FAIL_LOAD",
+    err,
   };
 };
 
@@ -28,7 +29,6 @@ export const fetchBeers = () => async (dispatch) => {
     const response = await beerApi.getWithPagination();
     dispatch(receiveBeer(Object.values(response.data)));
   } catch (error) {
-    console.log(error);
-    dispatch(failLoadBeer());
+    dispatch(failLoadBeer(error.message));
   }
 };
