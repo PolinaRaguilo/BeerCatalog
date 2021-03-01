@@ -18,6 +18,30 @@ class DetailsPage extends Component {
   render() {
     const urlID = this.props.match.params.id;
     const singleBeer = this.props.beersItems.find((item) => item.id === +urlID);
+    const maltList = singleBeer.ingredients.malt.map((item) => {
+      return (
+        <span className="ingridients__value">
+          &quot;{item.name}&quot; - {item.amount.value} {item.amount.unit}
+        </span>
+      );
+    });
+    const hopsList = singleBeer.ingredients.hops.map((item) => {
+      return (
+        <span className="ingridients__value">
+          &quot;{item.name}&quot; - {item.amount.value} {item.amount.unit}, add
+          when {item.add}
+        </span>
+      );
+    });
+
+    const mashList = singleBeer.method.mash_temp.map((item) => {
+      return (
+        <span className="ingridients__value">
+          {item.duration} minutes at {item.temp.value}℃
+        </span>
+      );
+    });
+
     return (
       <div className="details__wrapper">
         <div className="description__wrapper">
@@ -52,7 +76,7 @@ class DetailsPage extends Component {
                 <Tooltip title="Add" arrow>
                   <ErrorOutlineIcon className="tooltip__icon" />
                 </Tooltip>
-                <div className="propertie__value">6.0</div>
+                <div className="propertie__value">{singleBeer.abv}</div>
               </ListItem>
               <Divider />
               <ListItem>
@@ -60,7 +84,7 @@ class DetailsPage extends Component {
                 <Tooltip title="IBU" arrow>
                   <ErrorOutlineIcon className="tooltip__icon" />
                 </Tooltip>
-                <div className="propertie__value">60.0</div>
+                <div className="propertie__value">{singleBeer.ibu}</div>
               </ListItem>
               <Divider />
               <ListItem>
@@ -68,7 +92,7 @@ class DetailsPage extends Component {
                 <Tooltip title="EBC" arrow>
                   <ErrorOutlineIcon className="tooltip__icon" />
                 </Tooltip>
-                <div className="propertie__value">17.0</div>
+                <div className="propertie__value">{singleBeer.ebc}</div>
               </ListItem>
               <Divider />
             </List>
@@ -76,10 +100,16 @@ class DetailsPage extends Component {
           <div className="pairing__wrapper">
             <Typography variant="h4">Food pairing</Typography>
             <List className="list__pairing">
-              <ListItem>
-                <ListItemText primary="Inbox" />
-              </ListItem>
-              <Divider />
+              {singleBeer.food_pairing.map((item) => {
+                return (
+                  <>
+                    <ListItem>
+                      <ListItemText primary={item} />
+                    </ListItem>
+                    <Divider />
+                  </>
+                );
+              })}
             </List>
           </div>
         </div>
@@ -95,21 +125,19 @@ class DetailsPage extends Component {
               <List className="ingridients__properties">
                 <ListItem className="li__item">
                   <span className="ingridient__name">Water</span>
-                  <span className="ingridients__value">25 liters</span>
+                  <span className="ingridients__value">
+                    {singleBeer.boil_volume.value} {singleBeer.boil_volume.unit}
+                  </span>
                 </ListItem>
                 <Divider />
                 <ListItem className="li__item">
                   <span className="ingridient__name">Malt</span>
-                  <span className="ingridients__value">
-                    &quot;Extra Pale&quot; - 5.3 kilograms
-                  </span>
+                  {maltList}
                 </ListItem>
                 <Divider />
                 <ListItem className="li__item">
                   <span className="ingridient__name">Hops</span>
-                  <span className="ingridients__value">
-                    &quot;Ahtanum&quot; - 17.5 grams, add when start
-                  </span>
+                  {hopsList}
                   <span className="ingridients__value">
                     &quot;Chinook&quot; - 15 grams, add when start
                   </span>
@@ -118,7 +146,7 @@ class DetailsPage extends Component {
                 <ListItem className="li__item">
                   <span className="ingridient__name">Yeast</span>
                   <span className="ingridients__value">
-                    Wyeast 1056 - American Ale™
+                    {singleBeer.ingredients.yeast}
                   </span>
                 </ListItem>
                 <Divider />
@@ -130,16 +158,21 @@ class DetailsPage extends Component {
               <List className="method__properties">
                 <ListItem className="li__item">
                   <span className="ingridient__name">Mash</span>
-                  <span className="ingridients__value">75 minutes at 65℃</span>
-                  <span className="ingridients__value">75 minutes at 65℃</span>
+                  {mashList}
                 </ListItem>
                 <ListItem className="li__item">
                   <span className="ingridient__name">Fermentation</span>
-                  <span className="ingridients__value">Perform at 19℃</span>
+                  <span className="ingridients__value">
+                    Perform at {singleBeer.method.fermentation.temp.value}℃
+                  </span>
                 </ListItem>
                 <ListItem className="li__item">
                   <span className="ingridient__name">Twist</span>
-                  <p className="ingridients__value">Heather Honey: 125g</p>
+                  <p className="ingridients__value">
+                    {singleBeer.method.twist
+                      ? `${singleBeer.method.twist}`
+                      : "no information"}
+                  </p>
                 </ListItem>
               </List>
             </div>
