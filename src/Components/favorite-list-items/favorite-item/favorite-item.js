@@ -4,6 +4,7 @@ import {
   Card,
   CardActions,
   CardContent,
+  Link,
   Typography,
 } from "@material-ui/core";
 import PropTypes from "prop-types";
@@ -37,7 +38,7 @@ class FavoriteItem extends Component {
           </CardContent>
           <CardActions>
             <Button size="small" color="primary">
-              Open
+              <Link to={`/beer/${this.props.id}`}>Open</Link>
             </Button>
             <Button size="small" color="primary" onClick={this.deleteHandler}>
               Remove
