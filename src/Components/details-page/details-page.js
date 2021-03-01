@@ -1,3 +1,5 @@
+/* eslint-disable no-debugger */
+/* eslint-disable camelcase */
 /* eslint-disable arrow-parens */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
@@ -13,6 +15,10 @@ import {
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import "./details-page.css";
 import { connect } from "react-redux";
+import {
+  addFavorite,
+  deleteFavorite,
+} from "../../Redux/actions/favoriteAction";
 
 class DetailsPage extends Component {
   render() {
@@ -41,7 +47,19 @@ class DetailsPage extends Component {
         </span>
       );
     });
+    const addHandler = () => {
+      const { id, name, tagline, description, image_url } = singleBeer;
+      this.props.addToFav(id, name, tagline, description, image_url);
+    };
 
+    const deleteFavHandler = () => {
+      this.props.deleteFav(singleBeer.id);
+    };
+
+    const favoriteBeer = this.props.favoriteItems.find(
+      (item) => item.id === singleBeer.id
+    );
+    const isFavorite = this.props.favoriteItems.indexOf(favoriteBeer);
     return (
       <div className="details__wrapper">
         <div className="description__wrapper">
@@ -55,9 +73,24 @@ class DetailsPage extends Component {
             <Button
               variant="contained"
               color="primary"
-              className="details__btn"
+              className={`details__btn
+                ${
+                  isFavorite === -1 ? "btn-details__show" : "btn-details__none"
+                }`}
+              onClick={addHandler}
             >
               Add to favorites
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              className={`details__btn
+                ${
+                  isFavorite === -1 ? "btn-details__none" : "btn-details__show"
+                }`}
+              onClick={deleteFavHandler}
+            >
+              Remove from favorites
             </Button>
             <Typography variant="body2" className="details__description">
               {singleBeer.description}
@@ -186,12 +219,24 @@ class DetailsPage extends Component {
 const mapStateToProps = (state) => {
   return {
     beersItems: state.beerReducer.beers,
+    favoriteItems: state.favoriteReducer.favorites,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToFav: (id, name, tagline, description, img) =>
+      dispatch(addFavorite(id, name, tagline, description, img)),
+    deleteFav: (id) => dispatch(deleteFavorite(id)),
   };
 };
 
 DetailsPage.propTypes = {
   match: PropTypes.object.isRequired,
   beersItems: PropTypes.array.isRequired,
+  favoriteItems: PropTypes.array.isRequired,
+  addToFav: PropTypes.func.isRequired,
+  deleteFav: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(DetailsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(DetailsPage);

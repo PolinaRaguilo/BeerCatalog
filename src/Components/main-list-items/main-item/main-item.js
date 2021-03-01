@@ -36,7 +36,6 @@ class MainItem extends Component {
     const favoriteBeer = this.props.favoritesData.find(
       (item) => item.id === this.props.id
     );
-
     const isFavorite = this.props.favoritesData.indexOf(favoriteBeer);
     const { name, tagline, img } = this.props;
     return (
