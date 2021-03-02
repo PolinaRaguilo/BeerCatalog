@@ -83,11 +83,3 @@
 .li__item.li__item{
     display: block;
 }
-
-.btn-details__show.btn-details__show{
-    display: block;
-}
-
-.btn-details__none.btn-details__none{
-    display: none;
-}

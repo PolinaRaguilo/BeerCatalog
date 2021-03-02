@@ -74,9 +74,7 @@ class DetailsPage extends Component {
               variant="contained"
               color="primary"
               className={`details__btn
-                ${
-                  isFavorite === -1 ? "btn-details__show" : "btn-details__none"
-                }`}
+                ${isFavorite === -1 ? "btn__show" : "btn__none"}`}
               onClick={addHandler}
             >
               Add to favorites
@@ -85,9 +83,7 @@ class DetailsPage extends Component {
               variant="contained"
               color="primary"
               className={`details__btn
-                ${
-                  isFavorite === -1 ? "btn-details__none" : "btn-details__show"
-                }`}
+                ${isFavorite === -1 ? "btn__none" : "btn__show"}`}
               onClick={deleteFavHandler}
             >
               Remove from favorites

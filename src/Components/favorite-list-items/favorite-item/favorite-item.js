@@ -4,11 +4,11 @@ import {
   Card,
   CardActions,
   CardContent,
-  Link,
   Typography,
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 import "./favorite-item.css";
+import { Link } from "react-router-dom";
 
 class FavoriteItem extends Component {
   deleteHandler = () => {
@@ -38,7 +38,9 @@ class FavoriteItem extends Component {
           </CardContent>
           <CardActions>
             <Button size="small" color="primary">
-              <Link to={`/beer/${this.props.id}`}>Open</Link>
+              <Link to={`/beer/${this.props.id}`} className="link__open">
+                Open
+              </Link>
             </Button>
             <Button size="small" color="primary" onClick={this.deleteHandler}>
               Remove

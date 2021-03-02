@@ -14,16 +14,6 @@ import { Link } from "react-router-dom";
 import { deleteFavorite } from "../../../Redux/actions/favoriteAction";
 
 class MainItem extends Component {
-  // favoriteBeer = this.props.favoritesData.find(
-  //   (item) => item.id === this.props.id
-  // );
-
-  // isFavorite = this.props.favoritesData.indexOf(this.favoriteBeer);
-
-  // isFavorite = this.props.favoritesData.filter(
-  //   (item) => item.id === this.props.id
-  // );
-
   addFavoriteHandler = () => {
     this.props.addFavoriteBeer(this.props.id);
   };
