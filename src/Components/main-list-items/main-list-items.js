@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import InfiniteScroll from "react-infinite-scroll-component";
 import MainItem from "./main-item/main-item";
 import "./main-list-items.css";
 import { addFavorite } from "../../Redux/actions/favoriteAction";
@@ -31,11 +32,26 @@ class MainListItems extends Component {
       );
     });
     return (
-      <div className="catalog__wrapper">
-        {this.props.errorItem ? <ErrorLoading /> : null}
-        {this.props.loadingItems ? <Spinner /> : null}
-        {!(this.props.errorItem || this.props.loadingItems) ? beerItems : null}
-      </div>
+      <>
+        <div className="catalog__wrapper">
+          {this.props.errorItem ? <ErrorLoading /> : null}
+          {this.props.loadingItems ? <Spinner /> : null}
+          {!(this.props.errorItem || this.props.loadingItems)
+            ? beerItems
+            : null}
+          <InfiniteScroll
+            dataLength={this.props.beerData.length}
+            next={this.props.onLoadMore}
+            hasMore
+            // loader={<Spinner style={{ margin: "0 auto" }} />}
+            endMessage={
+              <p style={{ textAlign: "center" }}>
+                <b> You have seen it all!</b>
+              </p>
+            }
+          />
+        </div>
+      </>
     );
   }
 }
@@ -58,6 +74,7 @@ MainListItems.propTypes = {
   onFavoriteBeer: PropTypes.func.isRequired,
   errorItem: PropTypes.bool.isRequired,
   loadingItems: PropTypes.bool.isRequired,
+  onLoadMore: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainListItems);

@@ -3,8 +3,8 @@ import axios from "axios";
 class BeerService {
   apiUrl = "https://api.punkapi.com/v2/beers";
 
-  getWithPagination() {
-    return axios.get(`${this.apiUrl}?page=1&per_page=15`);
+  getWithPagination(page) {
+    return axios.get(`${this.apiUrl}?page=${page}&per_page=12`);
   }
 
   getOneBeer() {

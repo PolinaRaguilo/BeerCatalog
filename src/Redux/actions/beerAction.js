@@ -23,10 +23,10 @@ const failLoadBeer = (err) => {
   };
 };
 
-export const fetchBeers = () => async (dispatch) => {
+export const fetchBeers = (page) => async (dispatch) => {
   dispatch(requestBeer());
   try {
-    const response = await beerApi.getWithPagination();
+    const response = await beerApi.getWithPagination(page);
     dispatch(receiveBeer(Object.values(response.data)));
   } catch (error) {
     dispatch(failLoadBeer(error.message));

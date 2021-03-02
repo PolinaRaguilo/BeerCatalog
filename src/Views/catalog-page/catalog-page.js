@@ -6,14 +6,50 @@ import MainListItems from "../../Components/main-list-items/main-list-items";
 import { fetchBeers } from "../../Redux/actions/beerAction";
 
 class CatalogPage extends Component {
+  state = {
+    page: 1,
+    // loadingMore: false,
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  // handleScroll = () => {
+  //   // e.preventDefault();
+  //   const lastItem = document.querySelector(
+  //     ".catalog__wrapper  .card__wrapper:last-child "
+  //   );
+  //   // console.log(lastItem);
+  //   const lastItemOffset = lastItem.offsetTop + lastItem.clientHeight;
+  //   const pageOffset = window.pageYOffset + window.innerHeight;
+  //   const bottomOffset = 20;
+  //   if (pageOffset > lastItemOffset - bottomOffset) {
+  //     this.onMore();
+  //   }
+  // };
+
+  onLoadBeersHandler = () => {
+    this.props.getBeers(this.state.page);
+  };
+
   componentDidMount = () => {
-    this.props.getBeers();
+    this.props.getBeers(this.state.page);
+    // this.scrollListener = window.addEventListener("scroll", () => {
+    //   this.handleScroll();
+    // });
+  };
+
+  onMore = () => {
+    this.setState(
+      (state) => ({
+        page: state.page + 1,
+      }),
+      this.onLoadBeersHandler
+    );
   };
 
   render() {
     return (
       <>
-        <MainListItems />
+        <MainListItems onLoadMore={this.onMore} />
       </>
     );
   }
@@ -21,7 +57,7 @@ class CatalogPage extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getBeers: () => dispatch(fetchBeers()),
+    getBeers: (page) => dispatch(fetchBeers(page)),
   };
 };
 

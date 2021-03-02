@@ -10,7 +10,7 @@ const beerReducer = (state = initialState, action) => {
     case "BEERS/RECEIVE_BEERS":
       return {
         ...state,
-        beers: action.beers,
+        beers: [...state.beers, ...action.beers],
         loadingItems: false,
       };
     case "BEERS/REQUEST_BEERS":
