@@ -33,24 +33,34 @@ class MainListItems extends Component {
     });
     return (
       <>
-        <div className="catalog__wrapper">
+        {/* <div className="catalog__wrapper">
           {this.props.errorItem ? <ErrorLoading /> : null}
-          {this.props.loadingItems ? <Spinner /> : null}
-          {!(this.props.errorItem || this.props.loadingItems)
+          {/* {this.props.loadingItems ? <Spinner /> : null} 
+           {!(this.props.errorItem || this.props.loadingItems)
             ? beerItems
-            : null}
-          <InfiniteScroll
-            dataLength={this.props.beerData.length}
-            next={this.props.onLoadMore}
-            hasMore
-            // loader={<Spinner style={{ margin: "0 auto" }} />}
-            endMessage={
-              <p style={{ textAlign: "center" }}>
-                <b> You have seen it all!</b>
-              </p>
-            }
-          />
-        </div>
+            : null} 
+        </div> */}
+        <InfiniteScroll
+          className="infiniteScroll"
+          dataLength={this.props.beerData.length}
+          next={this.props.onLoadMore}
+          hasMore
+          loader={<Spinner style={{ float: "bottom" }} />}
+          endMessage={
+            <p style={{ textAlign: "center" }}>
+              <b> You have seen it all!</b>
+            </p>
+          }
+        >
+          <div className="catalog__wrapper">
+            {this.props.errorItem ? <ErrorLoading /> : null}
+            {this.props.loadingItems ? <Spinner /> : null}
+            {/* {!(this.props.errorItem || this.props.loadingItems)
+              ? beerItems
+              : null} */}
+            {beerItems}
+          </div>
+        </InfiniteScroll>
       </>
     );
   }

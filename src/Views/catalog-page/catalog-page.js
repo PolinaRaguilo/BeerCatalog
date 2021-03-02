@@ -61,8 +61,14 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+const mapStateToProps = (state) => {
+  return {
+    beersAll: state.beerReducer.beers,
+  };
+};
+
 CatalogPage.propTypes = {
   getBeers: PropTypes.func.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(CatalogPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CatalogPage);
