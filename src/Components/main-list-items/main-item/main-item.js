@@ -31,7 +31,14 @@ class MainItem extends Component {
     return (
       <Card className="card__wrapper">
         <CardContent>
-          <img src={img} alt="beer" className="card__img" />
+          <img
+            src={
+              img ||
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png"
+            }
+            alt="beer"
+            className={img ? "card__img" : "no_img"}
+          />
           <Typography variant="h5" component="h2">
             {name}
           </Typography>

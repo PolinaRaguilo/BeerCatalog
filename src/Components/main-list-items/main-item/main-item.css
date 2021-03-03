@@ -30,3 +30,9 @@
 .link__open:visited{
     color: unset;
 }
+
+.no_img{
+    display: block;
+    width: 200px;
+    margin: 0 auto;
+}
