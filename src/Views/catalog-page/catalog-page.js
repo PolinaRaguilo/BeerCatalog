@@ -15,7 +15,6 @@ class CatalogPage extends Component {
   };
 
   componentDidMount = () => {
-    // this.setState({ page: 1 });
     this.props.getBeers(this.state.page);
   };
 
@@ -26,7 +25,6 @@ class CatalogPage extends Component {
       }),
       this.onLoadBeersHandler
     );
-    console.log(this.state.page);
   };
 
   render() {

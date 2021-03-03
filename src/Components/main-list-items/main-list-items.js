@@ -38,8 +38,7 @@ class MainListItems extends Component {
           dataLength={this.props.beerData.length}
           next={this.props.onLoadMore}
           hasMore
-          loader={<Spinner />}
-          // loader={this.props.loadingItems ? <Spinner /> : null}
+          loader={this.props.errorItem ? null : <Spinner />}
           endMessage={
             <p style={{ textAlign: "center" }}>
               <b> You have seen it all!</b>
@@ -49,9 +48,9 @@ class MainListItems extends Component {
           <div className="catalog__wrapper">
             {this.props.errorItem ? <ErrorLoading /> : null}
             {/* {this.props.loadingItems ? <Spinner /> : null} */}
-            {/* {!(this.props.errorItem || this.props.loadingItems)
+            {!(this.props.errorItem || this.props.loadingItems)
               ? beerItems
-              : null} */}
+              : null}
             {beerItems}
           </div>
         </InfiniteScroll>
@@ -77,7 +76,7 @@ MainListItems.propTypes = {
   beerData: PropTypes.array.isRequired,
   onFavoriteBeer: PropTypes.func.isRequired,
   errorItem: PropTypes.bool.isRequired,
-  // loadingItems: PropTypes.bool.isRequired,
+  loadingItems: PropTypes.bool.isRequired,
   onLoadMore: PropTypes.func.isRequired,
 };
 
