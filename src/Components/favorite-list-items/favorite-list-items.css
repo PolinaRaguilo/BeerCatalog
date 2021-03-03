@@ -7,3 +7,17 @@
     font-size: 35px;
     margin: 0;
 }
+
+.pagination__none{
+    display: none;
+}
+
+.pagination__show{
+    display: block;
+}
+
+.MuiPagination-ul.MuiPagination-ul{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
