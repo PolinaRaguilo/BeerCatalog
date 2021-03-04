@@ -19,7 +19,7 @@ class FavoriteListItems extends Component {
     this.props.deleteFromFavorite(id);
   };
 
-  onChangePage = (page) => {
+  onChangePage = (e, page) => {
     this.setState({ currPage: page });
   };
 
@@ -51,7 +51,7 @@ class FavoriteListItems extends Component {
         <Pagination
           count={Math.ceil(this.props.favoriteBeers.length / 5)}
           color="primary"
-          onChange={() => this.onChangePage(this.page)}
+          onChange={(e, page) => this.onChangePage(e, page)}
           className={
             this.props.favoriteBeers.length <= 5
               ? "pagination__none"
