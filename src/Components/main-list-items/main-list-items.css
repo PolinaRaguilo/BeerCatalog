@@ -2,8 +2,31 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    padding: 100px 50px 0px 50px;
+    padding: 70px 50px 0px 50px;
 }
 .infiniteScroll{
     overflow: hidden !important;
 }
+
+.search__input.search__input{
+    display: block;
+    text-align: center;
+    margin-top: 100px;
+
+}
+
+.MuiInputBase-input.MuiInputBase-input{
+    width: 300px;
+}
+
+.no_res{
+    display: block;
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 0;
+}
+
+.hide{
+    display: none;
+}
+
