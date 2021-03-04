@@ -19,14 +19,29 @@
     width: 300px;
 }
 
-.no_res{
+.res{
     display: block;
     text-align: center;
     font-size: 25px;
     margin-bottom: 0;
 }
 
-.hide{
-    display: none;
+
+.search__panel{
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 300px;
 }
 
+.filter__title{
+    margin-right: 35px;
+}
+
+.filter__value{
+    margin-right: 7px;
+}
+
+.MuiGrid-spacing-xs-2 > .MuiGrid-item{
+    padding-bottom: 0;
+}

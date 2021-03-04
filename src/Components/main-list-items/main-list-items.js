@@ -5,7 +5,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { IconButton, InputAdornment, TextField } from "@material-ui/core";
+import {
+  Grid,
+  IconButton,
+  InputAdornment,
+  Slider,
+  TextField,
+} from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import MainItem from "./main-item/main-item";
 import "./main-list-items.css";
@@ -17,6 +23,9 @@ class MainListItems extends Component {
   state = {
     searchText: "",
     filteredData: this.props.beerData,
+    alcoholVolume: 0,
+    ibuSlider: 0,
+    ebcSlider: 0,
   };
 
   addToFavorite = (idBeer) => {
@@ -43,6 +52,18 @@ class MainListItems extends Component {
 
   onChangeText = (event) => {
     this.setState({ searchText: event.target.value });
+  };
+
+  alcoholVolumeChange = (e, newValue) => {
+    this.setState({ alcoholVolume: newValue });
+  };
+
+  ibuChange = (e, newValue) => {
+    this.setState({ ibuSlider: newValue });
+  };
+
+  ebcChange = (e, newValue) => {
+    this.setState({ ebcSlider: newValue });
   };
 
   render() {
@@ -72,6 +93,8 @@ class MainListItems extends Component {
         />
       );
     });
+    const showItems =
+      this.state.filteredData.length === 0 ? beerItems : filteredBeer;
     return (
       <>
         <TextField
@@ -90,12 +113,70 @@ class MainListItems extends Component {
             ),
           }}
         />
-        <h4
-          // className={this.state.filteredData.length === 0 ? "no_res" : "hide"}
-          className="no_res"
-        >
-          RESULTS: {this.state.filteredData.length}
-        </h4>
+        <div className="search__panel">
+          <h3 className="res">Filter results</h3>
+          <Grid container spacing={2} alignItems="center">
+            <Grid>
+              <span className="filter__title">Alcohol by volume</span>
+            </Grid>
+            <Grid>
+              <span className="filter__value">
+                {this.state.alcoholVolume === 0
+                  ? null
+                  : this.state.alcoholVolume}
+              </span>
+            </Grid>
+            <Grid item xs>
+              <Slider
+                min={2}
+                max={14}
+                value={this.state.alcoholVolume}
+                onChange={this.alcoholVolumeChange}
+                aria-labelledby="input-slider1"
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={2} alignItems="center">
+            <Grid>
+              <span className="filter__title">
+                International Bitterness Units
+              </span>
+            </Grid>
+            <Grid>
+              <span className="filter__value">
+                {this.state.ibuSlider === 0 ? null : this.state.ibuSlider}
+              </span>
+            </Grid>
+            <Grid item xs>
+              <Slider
+                min={0}
+                max={120}
+                value={this.state.ibuSlider}
+                onChange={this.ibuChange}
+                aria-labelledby="input-slider2"
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={2} alignItems="center">
+            <Grid>
+              <span className="filter__title">Color by EBC</span>
+            </Grid>
+            <Grid>
+              <span className="filter__value">
+                {this.state.ebcSlider === 0 ? null : this.state.ebcSlider}
+              </span>
+            </Grid>
+            <Grid item xs>
+              <Slider
+                min={4}
+                max={80}
+                value={this.state.ebcSlider}
+                onChange={this.ebcChange}
+                aria-labelledby="input-slider"
+              />
+            </Grid>
+          </Grid>
+        </div>
         <InfiniteScroll
           className="infiniteScroll"
           dataLength={this.props.beerData.length}
@@ -112,10 +193,8 @@ class MainListItems extends Component {
             {this.props.errorItem ? <ErrorLoading /> : null}
             {/* {this.props.loadingItems ? <Spinner /> : null} */}
             {!(this.props.errorItem || this.props.loadingItems)
-              ? filteredBeer
+              ? showItems
               : null}
-
-            {this.state.filteredData.length === 0 ? beerItems : filteredBeer}
           </div>
         </InfiniteScroll>
       </>
