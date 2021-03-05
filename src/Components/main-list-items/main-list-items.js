@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {
-  Button,
+  // Button,
   Grid,
   IconButton,
   InputAdornment,
@@ -54,14 +54,19 @@ class MainListItems extends Component {
     this.setState({ filteredData: newList });
   };
 
-  onFilterHandler = () => {
+  onFilter = () => {
     const { alcoholVolume, ibuSlider, ebcSlider } = this.state;
     this.props.onFilterBeers(
       alcoholVolume,
       ibuSlider,
       ebcSlider,
-      this.props.forFilterData
+      this.state.filteredData
     );
+  };
+
+  onFilterHandler = () => {
+    this.onFilter();
+    this.onSearchData();
   };
 
   onChangeText = (event) => {
@@ -120,7 +125,7 @@ class MainListItems extends Component {
           InputProps={{
             endAdornment: (
               <InputAdornment position="start">
-                <IconButton onClick={this.onSearchData}>
+                <IconButton onClick={this.onFilterHandler}>
                   <SearchIcon />
                 </IconButton>
               </InputAdornment>
@@ -144,6 +149,7 @@ class MainListItems extends Component {
               <Slider
                 min={0}
                 max={14}
+                step={0.1}
                 value={this.state.alcoholVolume}
                 onChange={this.alcoholVolumeChange}
                 aria-labelledby="input-slider1"
@@ -190,14 +196,14 @@ class MainListItems extends Component {
               />
             </Grid>
           </Grid>
-          <Button
+          {/* <Button
             variant="contained"
             color="primary"
             className="btn__filter"
             onClick={this.onFilterHandler}
           >
             Filter
-          </Button>
+          </Button> */}
         </div>
         <InfiniteScroll
           className="infiniteScroll"
@@ -247,7 +253,7 @@ MainListItems.propTypes = {
   loadingItems: PropTypes.bool.isRequired,
   onLoadMore: PropTypes.func.isRequired,
   onFilterBeers: PropTypes.func.isRequired,
-  forFilterData: PropTypes.array.isRequired,
+  // forFilterData: PropTypes.array.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainListItems);

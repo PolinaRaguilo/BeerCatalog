@@ -31,11 +31,12 @@
     display: block;
     margin: 0 auto;
     margin-top: 20px;
-    width: 300px;
+    width: 400px;
 }
 
 .filter__title{
-    margin-right: 35px;
+    display: block ;
+    width: 190px;
 }
 
 .filter__value{
@@ -54,3 +55,4 @@
 .hide{
     display: none;
 }
+

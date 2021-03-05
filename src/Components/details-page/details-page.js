@@ -60,6 +60,7 @@ class DetailsPage extends Component {
       (item) => item.id === singleBeer.id
     );
     const isFavorite = this.props.favoriteItems.indexOf(favoriteBeer);
+
     return (
       <div className="details__wrapper">
         <div className="description__wrapper">

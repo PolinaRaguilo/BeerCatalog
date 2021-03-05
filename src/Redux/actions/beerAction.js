@@ -70,7 +70,6 @@ export const filterBeers = (alcoholFilter, ibuFilter, ebcFilter, data) => {
       .filter((item) => item.ibu === ibuFilter)
       .filter((item) => item.ebc === ebcFilter);
   }
-  console.log(filteredList);
   return {
     type: "BEERS/FILTRATION",
     filteredList,

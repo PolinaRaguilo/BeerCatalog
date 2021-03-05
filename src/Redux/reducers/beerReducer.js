@@ -3,7 +3,6 @@ const initialState = {
   errorMsg: null,
   errorItem: false,
   loadingItems: true,
-  forFilter: [],
 };
 
 const beerReducer = (state = initialState, action) => {
@@ -12,7 +11,6 @@ const beerReducer = (state = initialState, action) => {
       return {
         ...state,
         beers: [...state.beers, ...action.beers],
-        forFilter: [...state.forFilter, ...action.beers],
         loadingItems: false,
       };
     case "BEERS/REQUEST_BEERS":
