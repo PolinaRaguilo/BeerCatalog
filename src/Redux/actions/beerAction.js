@@ -46,3 +46,33 @@ export const fetchBeers = (page) => async (dispatch) => {
     dispatch(failLoadBeer(error.message));
   }
 };
+
+export const filterBeers = (alcoholFilter, ibuFilter, ebcFilter, data) => {
+  let filteredList;
+  if (alcoholFilter === 0 && ibuFilter === 0 && ebcFilter === 0) {
+    filteredList = data;
+  } else if (alcoholFilter !== 0 && ibuFilter === 0 && ebcFilter === 0) {
+    filteredList = data.filter((item) => item.abv === alcoholFilter);
+  } else if (alcoholFilter === 0 && ibuFilter !== 0 && ebcFilter === 0) {
+    filteredList = data.filter((item) => item.ibu === ibuFilter);
+  } else if (alcoholFilter === 0 && ibuFilter === 0 && ebcFilter !== 0) {
+    filteredList = data.filter((item) => item.ebc === ebcFilter);
+  } else if (alcoholFilter !== 0 && ibuFilter !== 0 && ebcFilter === 0) {
+    filteredList = data
+      .filter((item) => item.abv === alcoholFilter)
+      .filter((item) => item.ibu === ibuFilter);
+  } else if (alcoholFilter !== 0 && ibuFilter === 0 && ebcFilter !== 0) {
+    filteredList = data
+      .filter((item) => item.abv === alcoholFilter)
+      .filter((item) => item.ebc === ebcFilter);
+  } else if (alcoholFilter === 0 && ibuFilter !== 0 && ebcFilter !== 0) {
+    filteredList = data
+      .filter((item) => item.ibu === ibuFilter)
+      .filter((item) => item.ebc === ebcFilter);
+  }
+  console.log(filteredList);
+  return {
+    type: "BEERS/FILTRATION",
+    filteredList,
+  };
+};

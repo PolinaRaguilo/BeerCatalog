@@ -45,3 +45,12 @@
 .MuiGrid-spacing-xs-2 > .MuiGrid-item{
     padding-bottom: 0;
 }
+.btn__filter.btn__filter{
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.hide{
+    display: none;
+}

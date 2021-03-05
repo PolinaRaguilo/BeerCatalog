@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {
+  Button,
   Grid,
   IconButton,
   InputAdornment,
@@ -18,6 +19,7 @@ import "./main-list-items.css";
 import { addFavorite } from "../../Redux/actions/favoriteAction";
 import Spinner from "../Spinner/spinner";
 import ErrorLoading from "../Error/error-loading";
+import { filterBeers } from "../../Redux/actions/beerAction";
 
 class MainListItems extends Component {
   state = {
@@ -26,6 +28,7 @@ class MainListItems extends Component {
     alcoholVolume: 0,
     ibuSlider: 0,
     ebcSlider: 0,
+    searchRes: false,
   };
 
   addToFavorite = (idBeer) => {
@@ -35,6 +38,7 @@ class MainListItems extends Component {
   };
 
   onSearchData = () => {
+    this.setState({ searchRes: true });
     let currentData;
     let newList;
     if (this.state.searchText !== "") {
@@ -48,6 +52,16 @@ class MainListItems extends Component {
       newList = this.props.beerData;
     }
     this.setState({ filteredData: newList });
+  };
+
+  onFilterHandler = () => {
+    const { alcoholVolume, ibuSlider, ebcSlider } = this.state;
+    this.props.onFilterBeers(
+      alcoholVolume,
+      ibuSlider,
+      ebcSlider,
+      this.props.forFilterData
+    );
   };
 
   onChangeText = (event) => {
@@ -113,7 +127,7 @@ class MainListItems extends Component {
             ),
           }}
         />
-        <div className="search__panel">
+        <div className={this.state.searchRes ? "search__panel" : "hide"}>
           <h3 className="res">Filter results</h3>
           <Grid container spacing={2} alignItems="center">
             <Grid>
@@ -128,7 +142,7 @@ class MainListItems extends Component {
             </Grid>
             <Grid item xs>
               <Slider
-                min={2}
+                min={0}
                 max={14}
                 value={this.state.alcoholVolume}
                 onChange={this.alcoholVolumeChange}
@@ -176,6 +190,14 @@ class MainListItems extends Component {
               />
             </Grid>
           </Grid>
+          <Button
+            variant="contained"
+            color="primary"
+            className="btn__filter"
+            onClick={this.onFilterHandler}
+          >
+            Filter
+          </Button>
         </div>
         <InfiniteScroll
           className="infiniteScroll"
@@ -207,12 +229,15 @@ const mapStateToProps = (state) => {
     beerData: state.beerReducer.beers,
     errorItem: state.beerReducer.errorItem,
     loadingItems: state.beerReducer.loadingItems,
+    forFilterData: state.beerReducer.forFilter,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     onFavoriteBeer: (id, name, tagline, description, img) =>
       dispatch(addFavorite(id, name, tagline, description, img)),
+    onFilterBeers: (alcoholFilter, ibuFilter, ebcFilter, data) =>
+      dispatch(filterBeers(alcoholFilter, ibuFilter, ebcFilter, data)),
   };
 };
 MainListItems.propTypes = {
@@ -221,6 +246,8 @@ MainListItems.propTypes = {
   errorItem: PropTypes.bool.isRequired,
   loadingItems: PropTypes.bool.isRequired,
   onLoadMore: PropTypes.func.isRequired,
+  onFilterBeers: PropTypes.func.isRequired,
+  forFilterData: PropTypes.array.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainListItems);
