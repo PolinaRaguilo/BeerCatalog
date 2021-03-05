@@ -1,6 +1,7 @@
 /* eslint-disable arrow-parens */
 import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
+import Authorization from "./Components/Authorization/authorization";
 import DetailsPage from "./Components/details-page/details-page";
 import ErrorLoading from "./Components/Error/error-loading";
 import Header from "./Components/header/header";
@@ -13,7 +14,8 @@ class App extends Component {
       <>
         <BrowserRouter>
           <Header />
-          <Route exact path="/" component={CatalogPage} />
+          <Route exact path="/" component={Authorization} />
+          <Route exact path="/beer" component={CatalogPage} />
           <Route exact path="/favorite" component={FavoritePage} />
           <Route path="/beer/:id" component={DetailsPage} />
           <Route path="/error" component={ErrorLoading} />

@@ -1,0 +1,32 @@
+.form__wrapper{
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 15%;
+    padding-bottom: 20px;
+    width: 400px;
+    background-color: white;
+}
+.form__title{
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+.form__input{
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    height: 35px;
+}
+
+.form__button{
+    margin-bottom: 20px;
+    border: none;
+    width: 100px;
+    height: 30px;
+    border-radius: 20px;
+    background-color:#3F51B5;
+    color: white;
+}
+
+.form__link.form__link{
+    cursor: pointer;
+}
