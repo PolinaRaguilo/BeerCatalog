@@ -2,3 +2,12 @@
     text-decoration: none;
     color:black;
 }
+
+.btn__exit.btn__exit{
+    margin-left: 87%;
+}
+
+.btn__exit .MuiIconButton-label .MuiSvgIcon-root{
+    font-size: 40px;
+    color:white;
+}

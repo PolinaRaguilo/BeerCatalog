@@ -1,9 +1,8 @@
 /* eslint-disable arrow-parens */
-import { Link } from "@material-ui/core";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { isLogged } from "../../Redux/actions/authAction";
 import "./authorization.css";
 

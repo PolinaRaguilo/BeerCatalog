@@ -1,4 +1,6 @@
+/* eslint-disable arrow-parens */
 import React from "react";
+import PropTypes from "prop-types";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -17,7 +19,10 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import StarIcon from "@material-ui/icons/Star";
 import InboxIcon from "@material-ui/icons/Inbox";
-import { Link } from "react-router-dom";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { isLogged } from "../../Redux/actions/authAction";
 import "./header.css";
 
 const drawerWidth = 240;
@@ -80,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header() {
+function Header({ isLogin, onLogout }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -93,6 +98,13 @@ export default function Header() {
     setOpen(false);
   };
 
+  const onLogOutHandler = (e) => {
+    e.preventDefault();
+    onLogout(false);
+  };
+  if (isLogin === false) {
+    <Redirect to="/" />;
+  }
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -103,19 +115,26 @@ export default function Header() {
         })}
       >
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
+          {isLogin ? (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, open && classes.hide)}
+            >
+              <MenuIcon />
+            </IconButton>
+          ) : null}
 
           <Typography variant="h6" noWrap>
             Beer catalog
           </Typography>
+          {isLogin ? (
+            <IconButton className="btn__exit" onClick={onLogOutHandler}>
+              <ExitToAppIcon />
+            </IconButton>
+          ) : null}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -156,13 +175,22 @@ export default function Header() {
           </Link>
         </List>
       </Drawer>
-      {/* <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
-      >
-        <div className={classes.drawerHeader} />
-      </main> */}
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isLogin: state.authReducer.isLogin,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLogout: (onOut) => dispatch(isLogged(onOut)),
+  };
+};
+Header.propTypes = {
+  isLogin: PropTypes.bool.isRequired,
+  onLogout: PropTypes.func.isRequired,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
