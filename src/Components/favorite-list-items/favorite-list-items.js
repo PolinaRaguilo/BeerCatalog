@@ -1,7 +1,5 @@
 /* eslint-disable camelcase */
-/* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
-/* eslint-disable no-debugger */
 /* eslint-disable arrow-parens */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
