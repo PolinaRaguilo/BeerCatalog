@@ -1,3 +1,7 @@
-h3 + h2{
+/* h3 + h2{
+    color: red;
+} */
+
+h2[className~='show']{
     color: red;
 }

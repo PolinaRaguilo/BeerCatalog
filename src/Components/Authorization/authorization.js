@@ -10,6 +10,7 @@ class Authorization extends Component {
   state = {
     login: "",
     password: "",
+    errLogin: false,
   };
 
   onInputChange = (e) => {
@@ -22,8 +23,14 @@ class Authorization extends Component {
   onLogin = (e) => {
     e.preventDefault();
     const { login, password } = this.state;
-    if (login === "12" && password === "123") {
+    if (
+      login === localStorage.getItem(`user${login}`) &&
+      password === localStorage.getItem(`psw${login}`)
+    ) {
+      this.setState({ errLogin: false });
       this.props.onLogin(true);
+    } else {
+      this.setState({ errLogin: true });
     }
   };
 
@@ -34,6 +41,9 @@ class Authorization extends Component {
     return (
       <div className="form__wrapper">
         <h3 className="form__title">Login</h3>
+        <h3 className={this.state.errLogin ? "show" : "hide"}>
+          Wrong data, try again
+        </h3>
         <form action="submit" onSubmit={this.onLogin}>
           <input
             type="text"

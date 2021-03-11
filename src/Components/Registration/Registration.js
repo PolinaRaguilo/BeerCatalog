@@ -9,6 +9,8 @@ class RegistrationPage extends Component {
     password: null,
     confirmPassword: null,
     err: false,
+    existUser: false,
+    success: false,
   };
 
   onInputChange = (e) => {
@@ -24,12 +26,19 @@ class RegistrationPage extends Component {
     if (
       password === confirmPassword &&
       login &&
-      localStorage.getItem("user") !== login
+      localStorage.getItem("user") !== login &&
+      localStorage.getItem(`psw${login}`) !== password
     ) {
-      this.setState({ err: false });
-      localStorage.setItem("user", login);
+      this.setState({ err: false, existUser: false, success: true });
+      localStorage.setItem(`user${login}`, login);
+      localStorage.setItem(`psw${login}`, password);
+    } else if (
+      localStorage.getItem(`user${login}`) === login &&
+      localStorage.getItem(`psw${login}`) === password
+    ) {
+      this.setState({ err: false, existUser: true, success: false });
     } else {
-      this.setState({ err: true });
+      this.setState({ err: true, existUser: false, success: false });
     }
   };
 
@@ -40,6 +49,10 @@ class RegistrationPage extends Component {
         <h2 className={this.state.err ? "show" : "hide"}>
           Check your data and try again
         </h2>
+        <h2 className={this.state.existUser ? "show" : "hide"}>
+          Such user already exists
+        </h2>
+        <h2 className={this.state.success ? "show" : "hide"}>Success!</h2>
         <form action="submit" onSubmit={this.onRegistration}>
           <input
             type="text"
