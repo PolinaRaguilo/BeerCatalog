@@ -1,30 +1,28 @@
 const initialState = {
   beers: [],
   errorMsg: null,
-  errorItem: false,
-  loadingItems: true,
+  isLoading: true,
 };
 
 const beerReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "BEERS/RECEIVE_BEERS":
+    case "BEERS/SUCCESS_BEERS":
       return {
         ...state,
         beers: [...state.beers, ...action.beers],
-        loadingItems: false,
+        isLoading: false,
       };
     case "BEERS/REQUEST_BEERS":
       return {
         ...state,
-        loadingItems: true,
-        errorItem: false,
+        isLoading: true,
+        errorMsg: null,
       };
     case "BEERS/FAIL_LOAD":
       return {
         ...state,
         errorMsg: action.err,
-        errorItem: true,
-        loadingItems: false,
+        isLoading: false,
       };
     case "BEERS/FILTRATION":
       return {

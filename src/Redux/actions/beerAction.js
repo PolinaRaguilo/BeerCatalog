@@ -5,7 +5,7 @@ const beerApi = new BeerService();
 
 const receiveBeer = (beers) => {
   return {
-    type: "BEERS/RECEIVE_BEERS",
+    type: "BEERS/SUCCESS_BEERS",
     beers,
   };
 };

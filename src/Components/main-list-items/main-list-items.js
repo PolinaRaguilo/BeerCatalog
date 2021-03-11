@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {
-  // Button,
   Grid,
   IconButton,
   InputAdornment,
@@ -196,14 +195,6 @@ class MainListItems extends Component {
               />
             </Grid>
           </Grid>
-          {/* <Button
-            variant="contained"
-            color="primary"
-            className="btn__filter"
-            onClick={this.onFilterHandler}
-          >
-            Filter
-          </Button> */}
         </div>
         <InfiniteScroll
           className="infiniteScroll"
@@ -218,9 +209,9 @@ class MainListItems extends Component {
           }
         >
           <div className="catalog__wrapper">
-            {this.props.errorItem ? <ErrorLoading /> : null}
+            {this.props.errorItem !== null ? <ErrorLoading /> : null}
             {/* {this.props.loadingItems ? <Spinner /> : null} */}
-            {!(this.props.errorItem || this.props.loadingItems)
+            {this.props.errorItem !== null || !this.props.loadingItems
               ? showItems
               : null}
           </div>
@@ -233,8 +224,8 @@ class MainListItems extends Component {
 const mapStateToProps = (state) => {
   return {
     beerData: state.beerReducer.beers,
-    errorItem: state.beerReducer.errorItem,
-    loadingItems: state.beerReducer.loadingItems,
+    errorItem: state.beerReducer.errorMsg,
+    loadingItems: state.beerReducer.isLoading,
     forFilterData: state.beerReducer.forFilter,
   };
 };
