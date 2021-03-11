@@ -55,11 +55,8 @@ class DetailsPage extends Component {
     const deleteFavHandler = () => {
       this.props.deleteFav(singleBeer.id);
     };
-
-    const favoriteBeer = this.props.favoriteItems.find(
-      (item) => item.id === singleBeer.id
-    );
-    const isFavorite = this.props.favoriteItems.indexOf(favoriteBeer);
+    const favId = this.props.favoritesId.find((item) => item === +urlID);
+    const isFavorite = this.props.favoritesId.indexOf(favId);
 
     return (
       <div className="details__wrapper">
@@ -217,6 +214,7 @@ const mapStateToProps = (state) => {
   return {
     beersItems: state.beerReducer.beers,
     favoriteItems: state.favoriteReducer.favorites,
+    favoritesId: state.favoriteReducer.favoritesId,
   };
 };
 
@@ -231,9 +229,10 @@ const mapDispatchToProps = (dispatch) => {
 DetailsPage.propTypes = {
   match: PropTypes.object.isRequired,
   beersItems: PropTypes.array.isRequired,
-  favoriteItems: PropTypes.array.isRequired,
+  // favoriteItems: PropTypes.array.isRequired,
   addToFav: PropTypes.func.isRequired,
   deleteFav: PropTypes.func.isRequired,
+  favoritesId: PropTypes.array.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailsPage);

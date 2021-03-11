@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-debugger */
@@ -24,14 +25,23 @@ class FavoriteListItems extends Component {
   };
 
   render() {
+    const currArr = [];
     const indexOfLastPost = this.state.currPage * 5;
     const indexOfFirstPost = indexOfLastPost - 5;
-    const currentItems = this.props.favoriteBeers.slice(
+    const currentIdArr = this.props.favoritesId.slice(
       indexOfFirstPost,
       indexOfLastPost
     );
-    const favoriteItems = currentItems.map((item) => {
-      const { id, name, tagline, description, img } = item;
+    // eslint-disable-next-line no-unused-vars
+    const currentItems = this.props.dataBeers.filter((item) => {
+      for (let i = 0; i < currentIdArr.length; i++) {
+        if (item.id === currentIdArr[i]) {
+          currArr.push(item);
+        }
+      }
+    });
+    const favoriteItems = currArr.map((item) => {
+      const { id, name, tagline, description, image_url } = item;
       return (
         <FavoriteItem
           key={id}
@@ -39,7 +49,7 @@ class FavoriteListItems extends Component {
           name={name}
           tagline={tagline}
           description={description}
-          img={img}
+          img={image_url}
           deleteItem={this.deleteFavorite}
         />
       );
@@ -49,11 +59,11 @@ class FavoriteListItems extends Component {
         <h2 className="favorite__title">Your favorite beer</h2>
         {favoriteItems}
         <Pagination
-          count={Math.ceil(this.props.favoriteBeers.length / 5)}
+          count={Math.ceil(this.props.favoritesId.length / 5)}
           color="primary"
           onChange={(e, page) => this.onChangePage(e, page)}
           className={
-            this.props.favoriteBeers.length <= 5
+            this.props.favoritesId.length <= 5
               ? "pagination__none"
               : "pagination__show"
           }
@@ -65,8 +75,8 @@ class FavoriteListItems extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    favoriteBeers: state.favoriteReducer.favorites,
-    beersData: state.beerReducer.beers,
+    favoritesId: state.favoriteReducer.favoritesId,
+    dataBeers: state.beerReducer.beers,
   };
 };
 
@@ -77,8 +87,9 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 FavoriteListItems.propTypes = {
-  favoriteBeers: PropTypes.array.isRequired,
+  favoritesId: PropTypes.array.isRequired,
   deleteFromFavorite: PropTypes.func.isRequired,
+  dataBeers: PropTypes.array.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FavoriteListItems);

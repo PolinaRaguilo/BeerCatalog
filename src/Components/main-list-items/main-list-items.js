@@ -32,8 +32,7 @@ class MainListItems extends Component {
 
   addToFavorite = (idBeer) => {
     const beer = this.props.beerData.find((item) => item.id === idBeer);
-    const { id, name, tagline, description, image_url } = beer;
-    this.props.onFavoriteBeer(id, name, tagline, description, image_url);
+    this.props.onFavoriteBeer(beer.id);
   };
 
   onSearchData = () => {
@@ -211,9 +210,10 @@ class MainListItems extends Component {
           <div className="catalog__wrapper">
             {this.props.errorItem !== null ? <ErrorLoading /> : null}
             {/* {this.props.loadingItems ? <Spinner /> : null} */}
-            {this.props.errorItem !== null || !this.props.loadingItems
+            {/* {this.props.errorItem === null || this.props.loadingItems
               ? showItems
-              : null}
+              : null} */}
+            {showItems}
           </div>
         </InfiniteScroll>
       </>
@@ -227,12 +227,12 @@ const mapStateToProps = (state) => {
     errorItem: state.beerReducer.errorMsg,
     loadingItems: state.beerReducer.isLoading,
     forFilterData: state.beerReducer.forFilter,
+    favoritesId: state.favoriteReducer.favoritesId,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFavoriteBeer: (id, name, tagline, description, img) =>
-      dispatch(addFavorite(id, name, tagline, description, img)),
+    onFavoriteBeer: (id) => dispatch(addFavorite(id)),
     onFilterBeers: (alcoholFilter, ibuFilter, ebcFilter, data) =>
       dispatch(filterBeers(alcoholFilter, ibuFilter, ebcFilter, data)),
   };
@@ -241,10 +241,9 @@ MainListItems.propTypes = {
   beerData: PropTypes.array.isRequired,
   onFavoriteBeer: PropTypes.func.isRequired,
   errorItem: PropTypes.bool.isRequired,
-  loadingItems: PropTypes.bool.isRequired,
+  // loadingItems: PropTypes.bool.isRequired,
   onLoadMore: PropTypes.func.isRequired,
   onFilterBeers: PropTypes.func.isRequired,
-  // forFilterData: PropTypes.array.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainListItems);

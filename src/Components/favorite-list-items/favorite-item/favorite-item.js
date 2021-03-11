@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 import React, { Component } from "react";
 import {
   Button,
@@ -9,6 +10,7 @@ import {
 import PropTypes from "prop-types";
 import "./favorite-item.css";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 class FavoriteItem extends Component {
   deleteHandler = () => {
@@ -59,6 +61,13 @@ FavoriteItem.propTypes = {
   description: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
   deleteItem: PropTypes.func.isRequired,
+  // beerData: PropTypes.array.isRequired,
 };
 
-export default FavoriteItem;
+const mapStateToProps = (state) => {
+  return {
+    beerData: state.beerReducer.beers,
+  };
+};
+
+export default connect(mapStateToProps, null)(FavoriteItem);

@@ -23,10 +23,8 @@ class MainItem extends Component {
   };
 
   render() {
-    const favoriteBeer = this.props.favoritesData.find(
-      (item) => item.id === this.props.id
-    );
-    const isFavorite = this.props.favoritesData.indexOf(favoriteBeer);
+    const favId = this.props.favoritesId.find((item) => item === this.props.id);
+    const isFavorite = this.props.favoritesId.indexOf(favId);
     const { name, tagline, img } = this.props;
     return (
       <Card className="card__wrapper">
@@ -78,6 +76,7 @@ class MainItem extends Component {
 const mapStateToProps = (state) => {
   return {
     favoritesData: state.favoriteReducer.favorites,
+    favoritesId: state.favoriteReducer.favoritesId,
   };
 };
 
@@ -94,7 +93,8 @@ MainItem.propTypes = {
   img: PropTypes.string.isRequired,
   addFavoriteBeer: PropTypes.func.isRequired,
   onDeleteFavorite: PropTypes.func.isRequired,
-  favoritesData: PropTypes.array.isRequired,
+  // favoritesData: PropTypes.array.isRequired,
+  favoritesId: PropTypes.array.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainItem);

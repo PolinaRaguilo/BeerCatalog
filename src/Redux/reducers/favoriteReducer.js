@@ -1,6 +1,6 @@
 /* eslint-disable arrow-parens */
 const initialState = {
-  favorites: [],
+  favoritesId: [],
 };
 
 const favoriteReducer = (state = initialState, action) => {
@@ -8,21 +8,14 @@ const favoriteReducer = (state = initialState, action) => {
     case "ADD_TO_FAVORITE":
       return {
         ...state,
-        favorites: [
-          ...state.favorites,
-          {
-            id: action.id,
-            name: action.name,
-            tagline: action.tagline,
-            description: action.description,
-            img: action.img,
-          },
-        ],
+        favoritesId: [...state.favoritesId, action.id],
       };
     case "DELETE_FROM_FAVORITE":
       return {
         ...state,
-        favorites: [...state.favorites.filter((item) => item.id !== action.id)],
+        favoritesId: [
+          ...state.favoritesId.filter((item) => item !== action.id),
+        ],
       };
     default:
       return state;

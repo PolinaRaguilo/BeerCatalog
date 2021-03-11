@@ -1,12 +1,8 @@
 /* eslint-disable arrow-parens */
-export const addFavorite = (id, name, tagline, description, img) => {
+export const addFavorite = (id) => {
   return {
     type: "ADD_TO_FAVORITE",
     id,
-    name,
-    tagline,
-    description,
-    img,
   };
 };
 
