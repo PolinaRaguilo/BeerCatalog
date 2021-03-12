@@ -200,7 +200,7 @@ class MainListItems extends Component {
           dataLength={this.props.beerData.length}
           next={this.props.onLoadMore}
           hasMore
-          loader={this.props.errorItem ? null : <Spinner />}
+          loader={!this.props.errorItem && <Spinner />}
           endMessage={
             <p style={{ textAlign: "center" }}>
               <b> You have seen it all!</b>
@@ -208,7 +208,7 @@ class MainListItems extends Component {
           }
         >
           <div className="catalog__wrapper">
-            {this.props.errorItem !== null ? <ErrorLoading /> : null}
+            {this.props.errorItem !== null && <ErrorLoading />}
             {/* {this.props.loadingItems ? <Spinner /> : null} */}
             {/* {this.props.errorItem === null || this.props.loadingItems
               ? showItems

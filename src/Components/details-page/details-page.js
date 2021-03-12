@@ -68,24 +68,26 @@ class DetailsPage extends Component {
             <Typography variant="h4" className="details__tagline">
               {singleBeer.tagline}
             </Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              className={`details__btn
-                ${isFavorite === -1 ? "btn__show" : "btn__none"}`}
-              onClick={addHandler}
-            >
-              Add to favorites
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              className={`details__btn
-                ${isFavorite === -1 ? "btn__none" : "btn__show"}`}
-              onClick={deleteFavHandler}
-            >
-              Remove from favorites
-            </Button>
+            {isFavorite === -1 && (
+              <Button
+                variant="contained"
+                color="primary"
+                className="details__btn"
+                onClick={addHandler}
+              >
+                Add to favorites
+              </Button>
+            )}
+            {isFavorite !== -1 && (
+              <Button
+                variant="contained"
+                color="primary"
+                className="details__btn"
+                onClick={deleteFavHandler}
+              >
+                Remove from favorites
+              </Button>
+            )}
             <Typography variant="body2" className="details__description">
               {singleBeer.description}
             </Typography>

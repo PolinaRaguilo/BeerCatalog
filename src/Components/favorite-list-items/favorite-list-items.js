@@ -56,16 +56,13 @@ class FavoriteListItems extends Component {
       <div className="favorite__wrapper">
         <h2 className="favorite__title">Your favorite beer</h2>
         {favoriteItems}
-        <Pagination
-          count={Math.ceil(this.props.favoritesId.length / 5)}
-          color="primary"
-          onChange={(e, page) => this.onChangePage(e, page)}
-          className={
-            this.props.favoritesId.length <= 5
-              ? "pagination__none"
-              : "pagination__show"
-          }
-        />
+        {this.props.favoritesId.length >= 5 && (
+          <Pagination
+            count={Math.ceil(this.props.favoritesId.length / 5)}
+            color="primary"
+            onChange={(e, page) => this.onChangePage(e, page)}
+          />
+        )}
       </div>
     );
   }

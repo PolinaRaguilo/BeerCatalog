@@ -46,13 +46,10 @@ class RegistrationPage extends Component {
     return (
       <div className="form__wrapper">
         <h3 className="form__title">Sign Up</h3>
-        <h2 className={this.state.err ? "show" : "hide"}>
-          Check your data and try again
-        </h2>
-        <h2 className={this.state.existUser ? "show" : "hide"}>
-          Such user already exists
-        </h2>
-        <h2 className={this.state.success ? "show" : "hide"}>Success!</h2>
+        {this.state.err && <h2>Check your data and try again</h2>}
+        {this.state.existUser && <h2>Such user already exists</h2>}
+        {this.state.success && <h2>Success!</h2>}
+
         <form action="submit" onSubmit={this.onRegistration}>
           <input
             type="text"

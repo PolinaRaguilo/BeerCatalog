@@ -115,7 +115,7 @@ function Header({ isLogin, onLogout }) {
         })}
       >
         <Toolbar>
-          {isLogin ? (
+          {isLogin && (
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -125,16 +125,16 @@ function Header({ isLogin, onLogout }) {
             >
               <MenuIcon />
             </IconButton>
-          ) : null}
+          )}
 
           <Typography variant="h6" noWrap>
             Beer catalog
           </Typography>
-          {isLogin ? (
+          {isLogin && (
             <IconButton className="btn__exit" onClick={onLogOutHandler}>
               <ExitToAppIcon />
             </IconButton>
-          ) : null}
+          )}
         </Toolbar>
       </AppBar>
       <Drawer

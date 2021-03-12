@@ -50,23 +50,20 @@ class MainItem extends Component {
               Open
             </Link>
           </Button>
-
-          <Button
-            size="small"
-            color="primary"
-            onClick={this.addFavoriteHandler}
-            className={isFavorite === -1 ? "btn__show" : "btn__none"}
-          >
-            Favorite
-          </Button>
-          <Button
-            size="small"
-            color="primary"
-            className={isFavorite === -1 ? "btn__none" : "btn__show"}
-            onClick={this.deleteHandler}
-          >
-            Remove favorite
-          </Button>
+          {isFavorite === -1 && (
+            <Button
+              size="small"
+              color="primary"
+              onClick={this.addFavoriteHandler}
+            >
+              Favorite
+            </Button>
+          )}
+          {isFavorite !== -1 && (
+            <Button size="small" color="primary" onClick={this.deleteHandler}>
+              Remove favorite
+            </Button>
+          )}
         </CardActions>
       </Card>
     );

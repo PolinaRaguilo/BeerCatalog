@@ -41,9 +41,7 @@ class Authorization extends Component {
     return (
       <div className="form__wrapper">
         <h3 className="form__title">Login</h3>
-        <h3 className={this.state.errLogin ? "show" : "hide"}>
-          Wrong data, try again
-        </h3>
+        {this.state.errLogin && <h3>Wrong data, try again</h3>}
         <form action="submit" onSubmit={this.onLogin}>
           <input
             type="text"
